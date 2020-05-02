@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+    <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+    <meta name="keywords" content="翻译," />
+
+    <link rel="alternate" href="/atom.xml" title="ChaosLeong's Blog" type="application/atom+xml" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+    <meta name="description" content='原文地址：Fast Android asset theming with ColorFilter  从 Android L 开始，Material Theme 能够借助某些属性主题化 APP（图标及其他）  12345&amp;lt;style name="AppTheme" parent="android:Theme.Material"&amp;gt;  &amp;lt;item name="android:colo' />
+    <meta name="keywords" content="翻译" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="[译] 使用 ColorFilter 快速地主题化" />
+    <meta property="og:url" content="http://chaosleong.github.io/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/index.html" />
+    <meta property="og:site_name" content="ChaosLeong&#39;s Blog" />
+    <meta property="og:description" content='原文地址：Fast Android asset theming with ColorFilter  从 Android L 开始，Material Theme 能够借助某些属性主题化 APP（图标及其他）  12345&amp;lt;style name="AppTheme" parent="android:Theme.Material"&amp;gt;  &amp;lt;item name="android:colo' />
+    <meta property="og:locale" content="zh-Hans" />
+    <meta property="og:updated_time" content="2017-02-10T08:52:14.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="[译] 使用 ColorFilter 快速地主题化" />
+    <meta name="twitter:description" content='原文地址：Fast Android asset theming with ColorFilter  从 Android L 开始，Material Theme 能够借助某些属性主题化 APP（图标及其他）  12345&amp;lt;style name="AppTheme" parent="android:Theme.Material"&amp;gt;  &amp;lt;item name="android:colo' />
+
+    <script type="text/javascript" id="hexo.configurations">
+      var NexT = window.NexT || {};
+      var CONFIG = {
+        root: "/",
+        scheme: "Pisces",
+        sidebar: { position: "right", display: "post", offset: 12, offset_float: 0, b2t: false, scrollpercent: false },
+        fancybox: true,
+        motion: true,
+        duoshuo: {
+          userId: "0",
+          author: "博主",
+        },
+        algolia: {
+          applicationID: "",
+          apiKey: "",
+          indexName: "",
+          hits: { per_page: 10 },
+          labels: { input_placeholder: "Search for Posts", hits_empty: "We didn't find any results for the search: ${query}", hits_stats: "${hits} results found in ${time} ms" },
+        },
+      };
+    </script>
+
+    <link rel="canonical" href="http://chaosleong.github.io/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/" />
+
+    <title>[译] 使用 ColorFilter 快速地主题化 | ChaosLeong's Blog</title>
+  </head>
+
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+    <div class="container sidebar-position-right page-post-detail">
+      <div class="headband"></div>
+
+      <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner">
+          <div class="site-brand-wrapper">
+            <div class="site-meta">
+              <div class="custom-logo-site-title">
+                <a href="/" class="brand" rel="start">
+                  <span class="logo-line-before"><i></i></span>
+                  <span class="site-title">ChaosLeong's Blog</span>
+                  <span class="logo-line-after"><i></i></span>
+                </a>
+              </div>
+
+              <p class="site-subtitle">有志则不甘为下流</p>
+            </div>
+
+            <div class="site-nav-toggle">
+              <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+              </button>
+            </div>
+          </div>
+
+          <nav class="site-nav">
+            <ul id="menu" class="menu">
+              <li class="menu-item menu-item-home">
+                <a href="/" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+
+                  首页
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-categories">
+                <a href="/categories" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+
+                  分类
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-about">
+                <a href="/about" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+
+                  关于
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-archives">
+                <a href="/archives" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+
+                  归档
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-tags">
+                <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+              </li>
+              <li class="menu-item menu-item-link">
+                <a href="https://coindataflow.com/en" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+                  更多信息
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main" class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
+            <div id="content" class="content">
+              <div id="posts" class="posts-expand">
+                <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+                  <link itemprop="mainEntityOfPage" href="http://chaosleong.github.io/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/" />
+
+                  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      [译] 使用 ColorFilter 快速地主题化
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-16T09:44:55+08:00">
+                          2016-11-16
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                          <a href="/categories/Android/" itemprop="url" rel="index">
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a href="/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/#comments" itemprop="discussionUrl">
+                          <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/16/Fast-Android-asset-theming-with-ColorFilter/" itemprop="commentCount"></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <blockquote>
+                      <p>原文地址：<a href="http://blog.danlew.net/2014/08/18/fast-android-asset-theming-with-colorfilter/" target="_blank" rel="external">Fast Android asset theming with ColorFilter</a></p>
+                    </blockquote>
+                    <p>从 Android L 开始，<a href="2">Material Theme</a> 能够借助某些属性主题化 APP（图标及其他）</p>
+                    <figure class="highlight xml">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"android:Theme.Material"</span>&gt;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:colorPrimary"</span>&gt;</span>@color/primary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:colorPrimaryDark"</span>&gt;</span>@color/primary_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:colorAccent"</span>&gt;</span>@color/accent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <a id="more"></a>
+                    <p>这种方式能够节省很多时间。只需修改一次就能改变整个 APP 的颜色，或调整单个 drawable 的颜色，而不需要找设计师拿新的资源。</p>
+                    <p>
+                      我们可以通过查看 ImageView 的 <a href="https://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint" target="_blank" rel="external"><code>android:tint</code></a> 属性来了解这种方式是如何执行的。你可以在 xml 中设置一个 tint
+                      color，噢！资源的颜色已经不一样了！
+                    </p>
+                    <p>对于 ImageView 的 tint 属性，应当注意两点：</p>
+                    <ul>
+                      <li><p>ImageView 的 tint 会混合 tint color 以及原来的资源。你希望 tint color 为主，而不是将 tint 叠加于现有颜色的上方。例如，如果原来资源是黑色的（#FF000000），而你希望它变成 #77FFFFFF（半透白色阴影），最终你得到的是白色阴影叠加在黑色背景之上。</p></li>
+                      <li>
+                        <p><code>android:tint</code> 仅限于 ImageView，但你想全部有 Drawable 的 View 也能实现这种效果。</p>
+                      </li>
+                    </ul>
+                    <p>
+                      通过阅读 ImageView 中 tint 相关的实现，可以知道通过 <a href="https://developer.android.com/reference/android/graphics/ColorFilter.html" target="_blank" rel="external">ColorFilter</a> 即能轻易地解决上述两个问题。更详细地，ImageView 使用了
+                      <a href="http://ssp.impulsetrain.com/porterduff.html" target="_blank" rel="external">Porter/Duff</a> 将相应颜色应用到图片的上层来合成而达到 tint 的效果。
+                    </p>
+                    <p>
+                      为了解决第一个问题，我们只需要使用不同的 Porter/Duff 模式。ImageView 使用的是 <code>PorterDuff.Mode.SRC_ATOP</code>，该模式将 tint color 叠加于图片的上层中（但仍然将原图绘制在下方）。对于主题化，我们实际需要的是 <code>PorterDuff.Mode.SRC_IN</code>，该模式只会绘制 tint color。
+                    </p>
+                    <p>第二个问题也能轻易地避免，因为所有 Drawable 对象都有 <code>setColorFilter()</code> 方法。</p>
+                    <p>利用该方法将相应主题颜色应用到 View 的背景中的简单实例：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line">Resources res = getResources();</div><div class="line">Drawable background = res.getDrawable(R.drawable.background);</div><div class="line"><span class="keyword">int</span> primaryColor = res.getColor(R.color.primary);</div><div class="line">background.setColorFilter(primaryColor, PorterDuff.Mode.SRC_IN);</div><div class="line">View view = findViewById(R.id.my_view);</div><div class="line">view.setBackgroundDrawable(background);</div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>你也可以封装一个可复用的用于创建不同颜色 Drawable 的方法：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line"><span class="function"><span class="keyword">public</span> Drawable <span class="title">getTintedDrawable</span><span class="params">(Resources res,</span></span></div><div class="line">  @DrawableRes <span class="keyword">int</span> drawableResId, @ColorRes <span class="keyword">int</span> colorResId) &#123;</div><div class="line">    Drawable drawable = res.getDrawable(drawableResId);</div><div class="line">    <span class="keyword">int</span> color = res.getColor(colorResId);</div><div class="line">    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);</div><div class="line">    <span class="keyword">return</span> drawable;</div><div class="line">&#125;</div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>（附注：使用 <code>@DrawableRes</code>、<code>@ColorRes</code> 注解可以帮助我们避免调用方法时传入错误的参数。）</p>
+                    <p>虽然这种方式不如 Android L 那么方便地主题化，但该方法可向下兼容，所以你也可以考虑使用。</p>
+                    <h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2>
+                    <h3 id="Added-July-24-2015"><a href="#Added-July-24-2015" class="headerlink" title="Added July 24, 2015"></a>Added July 24, 2015</h3>
+                    <p>提醒一句：使用 <code>ColorFilter</code> 时会影响到 <code>Drawable</code> 的状态共享。</p>
+                    <p>作为优化，Drawable 会在应用内共享。例如，在不同的 <code>Toolbar</code> 中使用相同的 Action Bar 图标实际上只会产生一个 Drawable。同样地，如果你使用 <code>ColorFilter</code>，你可能会发现所有的 Drawable 都会发生变化即使你希望只改变其中一个。</p>
+                    <p>
+                      <a href="http://android-developers.blogspot.com/2009/05/drawable-mutations.html" target="_blank" rel="external">这篇文章</a>更深入地介绍了这种优化策略。如果你正在使用 <code>ColorFilter</code> 并且不希望改变所有的 Drawable，确保先调用
+                      <code>Drawable.mutate()</code> 再执行其他操作。
+                    </p>
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-tags">
+                      <a href="/tags/翻译/" rel="tag"># 翻译</a>
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+                        <a href="/2016/07/28/LoaderManager-Source-Analysis/" rel="next" title="LoaderManager 源码分析"> <i class="fa fa-chevron-left"></i> LoaderManager 源码分析 </a>
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+                        <a href="/2016/11/18/Forking-a-Repository/" rel="prev" title="Forking a Repository"> Forking a Repository <i class="fa fa-chevron-right"></i> </a>
+                      </div>
+                    </div>
+                  </footer>
+                </article>
+
+                <div class="post-spread"></div>
+              </div>
+            </div>
+
+            <div class="comments" id="comments">
+              <div id="disqus_thread">
+                <noscript>
+                  Please enable JavaScript to view the
+                  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-toggle">
+            <div class="sidebar-toggle-line-wrap">
+              <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+            </div>
+          </div>
+
+          <aside id="sidebar" class="sidebar">
+            <div class="sidebar-inner">
+              <ul class="sidebar-nav motion-element">
+                <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+                  文章目录
+                </li>
+                <li class="sidebar-nav-overview" data-target="site-overview">
+                  站点概览
+                </li>
+              </ul>
+
+              <section class="site-overview sidebar-panel">
+                <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                  <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Chaos Leong" />
+                  <p class="site-author-name" itemprop="name">Chaos Leong</p>
+
+                  <p class="site-description motion-element" itemprop="description">个人博客，技术分享</p>
+                </div>
+                <nav class="site-state motion-element">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives">
+                      <span class="site-state-item-count">25</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">6</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element"></div>
+              </section>
+
+              <!--noindex-->
+              <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+                <div class="post-toc">
+                  <div class="post-toc-content">
+                    <ol class="nav">
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#附录"><span class="nav-number">1.</span> <span class="nav-text">附录</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#Added-July-24-2015"><span class="nav-number">1.1.</span> <span class="nav-text">Added July 24, 2015</span></a>
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </section>
+              <!--/noindex-->
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            &copy;
+            <span itemprop="copyrightYear">2017</span>
+            <span class="with-love">
+              <i class="fa fa-heart"></i>
+            </span>
+            <span class="author" itemprop="copyrightHolder">Chaos Leong</span>
+          </div>
+
+          <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+          <div class="theme-info">
+            主题 -
+            <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+              NexT.Pisces
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      if (Object.prototype.toString.call(window.Promise) !== "[object Function]") {
+        window.Promise = null;
+      }
+    </script>
+
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+    <script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+    <script id="dsq-count-scr" src="https://chaosleongs-blog.disqus.com/count.js" async></script>
+
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = "http://chaosleong.github.io/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/";
+        this.page.identifier = "2016/11/16/Fast-Android-asset-theming-with-ColorFilter/";
+        this.page.title = "[译] 使用 ColorFilter 快速地主题化";
+      };
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://chaosleongs-blog.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", "" + +new Date());
+      (d.head || d.body).appendChild(s);
+    </script>
+  </body>
+</html>

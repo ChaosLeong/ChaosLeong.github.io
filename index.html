@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link
+      href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+    <meta
+      name="keywords"
+      content="Hexo, NexT, Chaos, Chaos Leong, Android, Java"
+    />
+
+    <link
+      rel="alternate"
+      href="/atom.xml"
+      title="ChaosLeong's Blog"
+      type="application/atom+xml"
+    />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/images/favicon.ico?v=5.1.0"
+    />
+
+    <meta name="description" content="个人博客，技术分享" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ChaosLeong&#39;s Blog" />
+    <meta property="og:url" content="http://chaosleong.github.io/index.html" />
+    <meta property="og:site_name" content="ChaosLeong&#39;s Blog" />
+    <meta property="og:description" content="个人博客，技术分享" />
+    <meta property="og:locale" content="zh-Hans" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ChaosLeong&#39;s Blog" />
+    <meta name="twitter:description" content="个人博客，技术分享" />
+
+    <script type="text/javascript" id="hexo.configurations">
+      var NexT = window.NexT || {};
+      var CONFIG = {
+        root: "/",
+        scheme: "Pisces",
+        sidebar: {
+          position: "right",
+          display: "post",
+          offset: 12,
+          offset_float: 0,
+          b2t: false,
+          scrollpercent: false,
+        },
+        fancybox: true,
+        motion: true,
+        duoshuo: {
+          userId: "0",
+          author: "博主",
+        },
+        algolia: {
+          applicationID: "",
+          apiKey: "",
+          indexName: "",
+          hits: { per_page: 10 },
+          labels: {
+            input_placeholder: "Search for Posts",
+            hits_empty: "We didn't find any results for the search: ${query}",
+            hits_stats: "${hits} results found in ${time} ms",
+          },
+        },
+      };
+    </script>
+
+    <link rel="canonical" href="http://chaosleong.github.io/" />
+
+    <title>ChaosLeong's Blog</title>
+  </head>
+
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+    <div class="container sidebar-position-right page-home">
+      <div class="headband"></div>
+
+      <header
+        id="header"
+        class="header"
+        itemscope
+        itemtype="http://schema.org/WPHeader"
+      >
+        <div class="header-inner">
+          <div class="site-brand-wrapper">
+            <div class="site-meta">
+              <div class="custom-logo-site-title">
+                <a href="/" class="brand" rel="start">
+                  <span class="logo-line-before"><i></i></span>
+                  <span class="site-title">ChaosLeong's Blog</span>
+                  <span class="logo-line-after"><i></i></span>
+                </a>
+              </div>
+
+              <p class="site-subtitle">有志则不甘为下流</p>
+            </div>
+
+            <div class="site-nav-toggle">
+              <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+              </button>
+            </div>
+          </div>
+
+          <nav class="site-nav">
+            <ul id="menu" class="menu">
+              <li class="menu-item menu-item-home">
+                <a href="/" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+
+                  首页
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-categories">
+                <a href="/categories" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+
+                  分类
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-about">
+                <a href="/about" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+
+                  关于
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-archives">
+                <a href="/archives" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+
+                  归档
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-tags">
+                <a href="/tags" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+
+                  标签
+                </a>
+              </li>
+              <li class="menu-item menu-item-link">
+                <a href="https://coindataflow.com" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+
+                  更多信息
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main" class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
+            <div id="content" class="content">
+              <section id="posts" class="posts-expand">
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/11/01/Remove-static-permissions-added-by-third-party-libraries-via-Gradle/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/11/01/Remove-static-permissions-added-by-third-party-libraries-via-Gradle/"
+                        itemprop="url"
+                      >
+                        利用 Gradle 移除第三方引入的静态权限
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-11-01T17:11:34+08:00"
+                        >
+                          2017-11-01
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/11/01/Remove-static-permissions-added-by-third-party-libraries-via-Gradle/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/11/01/Remove-static-permissions-added-by-third-party-libraries-via-Gradle/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>
+                      今天在群里有小伙伴提到自己的应用被其他第三方库添加了部分额外权限，好奇而研究了一番，发觉可以通过
+                      Gradle 达到移除静态权限。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/11/01/Remove-static-permissions-added-by-third-party-libraries-via-Gradle/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/09/22/Configure-AspectJ-in-Gradle-project/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/09/22/Configure-AspectJ-in-Gradle-project/"
+                        itemprop="url"
+                      >
+                        在 Gradle 项目中配置 AspectJ
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-09-22T16:00:05+08:00"
+                        >
+                          2017-09-22
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Java/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Java</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/09/22/Configure-AspectJ-in-Gradle-project/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/09/22/Configure-AspectJ-in-Gradle-project/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <h2 id="配置">
+                      <a href="#配置" class="headerlink" title="配置"></a>配置
+                    </h2>
+                    <p>
+                      根据 Gradle 官方给出来的 AspectJ 配置，需要在
+                      <code>build.config</code> 添加如下代码：
+                    </p>
+                    <figure class="highlight groovy">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line">buildscript &#123;</div><div class="line">  repositories &#123;</div><div class="line">    maven &#123;</div><div class="line">      url <span class="string">"https://plugins.gradle.org/m2/"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  dependencies &#123;</div><div class="line">    classpath <span class="string">"gradle.plugin.aspectj:gradle-aspectj:0.1.6"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply <span class="string">plugin:</span> <span class="string">"aspectj.gradle"</span></div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>
+                      然而直接执行
+                      <code>gradle build</code> 会出现以下错误提示：
+                    </p>
+                    <blockquote>
+                      <p>
+                        You must set the property ‘aspectjVersion’ before
+                        applying the aspectj plugin
+                      </p>
+                    </blockquote>
+                    <p>
+                      按照提示为环境添加以下配置（需注意下面代码要放置在
+                      <code>apply plugin: &quot;aspectj.gradle&quot;</code>
+                      之前）：
+                    </p>
+                    <figure class="highlight groovy">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line">project.ext &#123;</div><div class="line">    aspectjVersion = <span class="string">'1.8.10'</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>再执行 <code>gradle build</code>，正常运行~</p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/09/22/Configure-AspectJ-in-Gradle-project/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/06/14/How-LiveData-actually-works/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/06/14/How-LiveData-actually-works/"
+                        itemprop="url"
+                      >
+                        LiveData 源码分析
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-06-14T13:58:02+08:00"
+                        >
+                          2017-06-14
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/06/14/How-LiveData-actually-works/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/06/14/How-LiveData-actually-works/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <blockquote>
+                      <p>
+                        <code>_(:з」∠)_</code>
+                        流水账一篇<br />注：本文所有代码基于
+                        android.arch.lifecycle 1.0.0-alpha1
+                      </p>
+                    </blockquote>
+                    <p>
+                      在
+                      <a
+                        href="https://chaosleong.github.io/2017/05/27/How-Lifecycle-aware-Components-actually-works"
+                        >Lifecycle-aware Components 源码分析</a
+                      >
+                      一文中，我们已经分析了
+                      <strong>Lifecycle</strong> 框架中所有的 lifecyle
+                      事件产生流程以及分发流程。本文将会基于这部分知识来分析
+                      <strong>Lifecycle</strong> 框架中的
+                      <strong>LiveData</strong> 组件。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/06/14/How-LiveData-actually-works/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/05/27/How-Lifecycle-aware-Components-actually-works/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/05/27/How-Lifecycle-aware-Components-actually-works/"
+                        itemprop="url"
+                      >
+                        Lifecycle-aware Components 源码分析
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-05-27T12:13:16+08:00"
+                        >
+                          2017-05-27
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/05/27/How-Lifecycle-aware-Components-actually-works/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/05/27/How-Lifecycle-aware-Components-actually-works/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <blockquote>
+                      <p>
+                        注：本文所有代码基于 android.arch.lifecycle
+                        1.0.0-alpha1<br />另外，为了避免混淆，Fragment、Activity
+                        等组件自身的生命周期直用 “生命周期” 一词，而由
+                        <strong>Lifecycle</strong> 框架提供的生命周期则称为
+                        “lifecyle”
+                      </p>
+                    </blockquote>
+                    <p>
+                      最近看到不少人讨论 Google 推的
+                      <a
+                        href="https://developer.android.com/topic/libraries/architecture/index.html"
+                        target="_blank"
+                        rel="external"
+                        >Android Architecture Components</a
+                      >，其中
+                      <a
+                        href="https://developer.android.com/topic/libraries/architecture/lifecycle.html"
+                        target="_blank"
+                        rel="external"
+                        >Handling Lifecycles</a
+                      >
+                      一章展现了如何利用
+                      <code>android.arch.lifecycle</code>
+                      包提供的类来控制数据、监听器等的 lifecycle。同时，<a
+                        href="https://developer.android.com/topic/libraries/architecture/livedata.html"
+                        target="_blank"
+                        rel="external"
+                        >LiveData</a
+                      >
+                      与
+                      <a
+                        href="https://developer.android.com/topic/libraries/architecture/viewmodel.html"
+                        target="_blank"
+                        rel="external"
+                        >ViewModel</a
+                      >
+                      的 lifecycle 也依赖于
+                      <strong>Lifecycle</strong> 框架，所以分析
+                      <strong>Lifecycle</strong> 显然是有必要的。
+                    </p>
+                    <p>
+                      <strong>Lifecycle</strong> 到底是通过怎样的方式来绑定
+                      Android 组件的生命周期以及如何通知
+                      <strong>LifecycleObserver</strong>
+                      状态变化的呢？本文将会围绕这两个问题深入分析
+                      <strong>Lifecycle</strong> 源码。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/05/27/How-Lifecycle-aware-Components-actually-works/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/05/09/Building-AOSP-for-Nexus-3-maguro/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/05/09/Building-AOSP-for-Nexus-3-maguro/"
+                        itemprop="url"
+                      >
+                        Building AOSP for Nexus 3 (maguro)
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-05-09T22:56:15+08:00"
+                        >
+                          2017-05-09
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/05/09/Building-AOSP-for-Nexus-3-maguro/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/05/09/Building-AOSP-for-Nexus-3-maguro/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>
+                      最近终于将了解 AOSP
+                      提到日程上。在折腾了两晚后总算给吃了很久灰的 Nexus 3
+                      刷了自己编译出来的 4.3 系统，本文仅为记录这一过程。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/05/09/Building-AOSP-for-Nexus-3-maguro/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/05/03/Comparison-of-Android-swipe-back-libraries/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/05/03/Comparison-of-Android-swipe-back-libraries/"
+                        itemprop="url"
+                      >
+                        Android 平台滑动返回库对比
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-05-03T11:41:13+08:00"
+                        >
+                          2017-05-03
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/05/03/Comparison-of-Android-swipe-back-libraries/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/05/03/Comparison-of-Android-swipe-back-libraries/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>
+                      Github
+                      上滑动返回库比较多，由于实现思路甚至代码一部分库都差不多，所以只挑选了两个实现思路比较不同的库作为研究，分别是
+                      <strong
+                        ><a
+                          href="https://github.com/ikew0ng/SwipeBackLayout"
+                          target="_blank"
+                          rel="external"
+                          >SwipeBackLayout</a
+                        ></strong
+                      >
+                      和
+                      <strong
+                        ><a
+                          href="https://github.com/XBeats/and_swipeback"
+                          target="_blank"
+                          rel="external"
+                          >and_swipeback</a
+                        ></strong
+                      >。
+                    </p>
+                    <p>
+                      除滑动返回功能外，本文还会围绕滑动过程中呈现前一个界面的方案对上述两个库展开分析，其他部分源码细节不予分析。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/05/03/Comparison-of-Android-swipe-back-libraries/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/04/08/The-knowledge-of-the-PinView/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/04/08/The-knowledge-of-the-PinView/"
+                        itemprop="url"
+                      >
+                        PinView 的一些知识点
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-04-08T17:44:56+08:00"
+                        >
+                          2017-04-08
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/04/08/The-knowledge-of-the-PinView/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/04/08/The-knowledge-of-the-PinView/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <h2 id="前言">
+                      <a href="#前言" class="headerlink" title="前言"></a>前言
+                    </h2>
+                    <p>
+                      最近因为某个项目需要添加“验证码”功能，设计上区别于原生
+                      EditText，需要将四个数字分离（类似于微信、支付宝支付密码输入框）。在
+                      Github 上查找了一遍，发现大多数现有的控件都比较 dirty ——
+                      使用多个 EditText 达到字符分离的效果。
+                    </p>
+                    <p>
+                      唯一一个比较有意思的项目是
+                      <a
+                        href="https://github.com/EthanCo/PasswordInput"
+                        target="_blank"
+                        rel="external"
+                        >PasswordInput</a
+                      >，该控件直接继承于 EditText，通过重写 onDraw
+                      来实现每个文本对应一个方框，并通过重写 onTextChanged
+                      方法监听文本变化以绘制对应的圆点。
+                    </p>
+                    <p>
+                      然而，某些情况下我们需要直接显示输入的验证码（PIN
+                      码、短信验证码等），但
+                      <a
+                        href="https://github.com/EthanCo/PasswordInput"
+                        target="_blank"
+                        rel="external"
+                        >PasswordInput</a
+                      >
+                      并没有提供相应的方法达到这种效果。于是抽空根据
+                      <a
+                        href="https://github.com/EthanCo/PasswordInput"
+                        target="_blank"
+                        rel="external"
+                        >PasswordInput</a
+                      >
+                      的思路实现了
+                      <a
+                        href="https://github.com/ChaosLeong/PinView"
+                        target="_blank"
+                        rel="external"
+                        >PinView</a
+                      >
+                      并开源于 Github。
+                    </p>
+                    <p>
+                      此文主要为记录编码过程中的一些思路以及所遇到的一些问题与对应的解决方案。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/04/08/The-knowledge-of-the-PinView/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/03/19/Why-Activities-in-Android-are-not-UI-Elements/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/03/19/Why-Activities-in-Android-are-not-UI-Elements/"
+                        itemprop="url"
+                      >
+                        [译] 为什么 Activity 不应包含 UI 逻辑
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-03-19T11:14:33+08:00"
+                        >
+                          2017-03-19
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/03/19/Why-Activities-in-Android-are-not-UI-Elements/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/03/19/Why-Activities-in-Android-are-not-UI-Elements/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <blockquote>
+                      <p>
+                        原文地址：<a
+                          href="http://www.techyourchance.com/activities-android/"
+                          target="_blank"
+                          rel="external"
+                          >Why Activities in Android are not UI Elements</a
+                        ><br />已获得原作者授权，译文有删减
+                      </p>
+                    </blockquote>
+                    <p>
+                      这篇文章中我们将通过面向对象设计中的单一职责原则来观察
+                      Activity，并试图了解如何更好地在 Activity
+                      中实施单一职责原则。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/03/19/Why-Activities-in-Android-are-not-UI-Elements/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/02/10/Configuring-Gradle-Proxy/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/02/10/Configuring-Gradle-Proxy/"
+                        itemprop="url"
+                      >
+                        Gradle 设置代理
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-02-10T15:30:24+08:00"
+                        >
+                          2017-02-10
+                        </time>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/02/10/Configuring-Gradle-Proxy/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/02/10/Configuring-Gradle-Proxy/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>
+                      Gradle 可以通过命令行或者配置
+                      <code>gradle.properties</code> 使用代理下载依赖包。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/02/10/Configuring-Gradle-Proxy/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+
+                <article
+                  class="post post-type-normal"
+                  itemscope
+                  itemtype="http://schema.org/Article"
+                >
+                  <link
+                    itemprop="mainEntityOfPage"
+                    href="http://chaosleong.github.io/2017/01/23/okhttp-interceptor-server-mock/"
+                  />
+
+                  <span
+                    hidden
+                    itemprop="author"
+                    itemscope
+                    itemtype="http://schema.org/Person"
+                  >
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span
+                    hidden
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="http://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      <a
+                        class="post-title-link"
+                        href="/2017/01/23/okhttp-interceptor-server-mock/"
+                        itemprop="url"
+                      >
+                        利用 OkHttp Interceptor 模拟数据
+                      </a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time
+                          title="创建于"
+                          itemprop="dateCreated datePublished"
+                          datetime="2017-01-23T11:05:15+08:00"
+                        >
+                          2017-01-23
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span
+                          itemprop="about"
+                          itemscope
+                          itemtype="http://schema.org/Thing"
+                        >
+                          <a
+                            href="/categories/Android/"
+                            itemprop="url"
+                            rel="index"
+                          >
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a
+                          href="/2017/01/23/okhttp-interceptor-server-mock/#comments"
+                          itemprop="discussionUrl"
+                        >
+                          <span
+                            class="post-comments-count disqus-comment-count"
+                            data-disqus-identifier="2017/01/23/okhttp-interceptor-server-mock/"
+                            itemprop="commentCount"
+                          ></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>
+                      客户端开发过程中，偶尔我们会碰到服务端 API
+                      尚未部署，而客户端又需要数据调试的情况。这时我们就可以根据与服务端协商定好的接口模拟数据的返回。
+                    </p>
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a
+                        class="btn"
+                        href="/2017/01/23/okhttp-interceptor-server-mock/"
+                        rel="contents"
+                      >
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-eof"></div>
+                  </footer>
+                </article>
+              </section>
+
+              <nav class="pagination">
+                <span class="page-number current">1</span
+                ><a class="page-number" href="/page/2/">2</a
+                ><a class="page-number" href="/page/3/">3</a
+                ><a class="extend next" rel="next" href="/page/2/"
+                  ><i class="fa fa-angle-right"></i
+                ></a>
+              </nav>
+            </div>
+          </div>
+
+          <div class="sidebar-toggle">
+            <div class="sidebar-toggle-line-wrap">
+              <span
+                class="sidebar-toggle-line sidebar-toggle-line-first"
+              ></span>
+              <span
+                class="sidebar-toggle-line sidebar-toggle-line-middle"
+              ></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+            </div>
+          </div>
+
+          <aside id="sidebar" class="sidebar">
+            <div class="sidebar-inner">
+              <section class="site-overview sidebar-panel sidebar-panel-active">
+                <div
+                  class="site-author motion-element"
+                  itemprop="author"
+                  itemscope
+                  itemtype="http://schema.org/Person"
+                >
+                  <img
+                    class="site-author-image"
+                    itemprop="image"
+                    src="/images/avatar.png"
+                    alt="Chaos Leong"
+                  />
+                  <p class="site-author-name" itemprop="name">Chaos Leong</p>
+
+                  <p
+                    class="site-description motion-element"
+                    itemprop="description"
+                  >
+                    个人博客，技术分享
+                  </p>
+                </div>
+                <nav class="site-state motion-element">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives">
+                      <span class="site-state-item-count">25</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">6</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element"></div>
+              </section>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            &copy;
+            <span itemprop="copyrightYear">2017</span>
+            <span class="with-love">
+              <i class="fa fa-heart"></i>
+            </span>
+            <span class="author" itemprop="copyrightHolder">Chaos Leong</span>
+          </div>
+
+          <div class="powered-by">
+            由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+          </div>
+
+          <div class="theme-info">
+            主题 -
+            <a
+              class="theme-link"
+              href="https://github.com/iissnan/hexo-theme-next"
+            >
+              NexT.Pisces
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      if (
+        Object.prototype.toString.call(window.Promise) !== "[object Function]"
+      ) {
+        window.Promise = null;
+      }
+    </script>
+
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+    <script
+      type="text/javascript"
+      src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/lib/velocity/velocity.min.js?v=1.2.1"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/lib/velocity/velocity.ui.min.js?v=1.2.1"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"
+    ></script>
+
+    <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+    <script
+      type="text/javascript"
+      src="/js/src/schemes/pisces.js?v=5.1.0"
+    ></script>
+
+    <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+    <script
+      id="dsq-count-scr"
+      src="https://chaosleongs-blog.disqus.com/count.js"
+      async
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+    <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+    <meta name="keywords" content="技巧," />
+
+    <link rel="alternate" href="/atom.xml" title="ChaosLeong's Blog" type="application/atom+xml" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+    <meta name="description" content="客户端开发过程中，偶尔我们会碰到服务端 API 尚未部署，而客户端又需要数据调试的情况。这时我们就可以根据与服务端协商定好的接口模拟数据的返回。" />
+    <meta name="keywords" content="技巧" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="利用 OkHttp Interceptor 模拟数据" />
+    <meta property="og:url" content="http://chaosleong.github.io/2017/01/23/okhttp-interceptor-server-mock/index.html" />
+    <meta property="og:site_name" content="ChaosLeong&#39;s Blog" />
+    <meta property="og:description" content="客户端开发过程中，偶尔我们会碰到服务端 API 尚未部署，而客户端又需要数据调试的情况。这时我们就可以根据与服务端协商定好的接口模拟数据的返回。" />
+    <meta property="og:locale" content="zh-Hans" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png" />
+    <meta property="og:updated_time" content="2017-02-10T08:45:33.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="利用 OkHttp Interceptor 模拟数据" />
+    <meta name="twitter:description" content="客户端开发过程中，偶尔我们会碰到服务端 API 尚未部署，而客户端又需要数据调试的情况。这时我们就可以根据与服务端协商定好的接口模拟数据的返回。" />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png" />
+
+    <script type="text/javascript" id="hexo.configurations">
+      var NexT = window.NexT || {};
+      var CONFIG = {
+        root: "/",
+        scheme: "Pisces",
+        sidebar: { position: "right", display: "post", offset: 12, offset_float: 0, b2t: false, scrollpercent: false },
+        fancybox: true,
+        motion: true,
+        duoshuo: {
+          userId: "0",
+          author: "博主",
+        },
+        algolia: {
+          applicationID: "",
+          apiKey: "",
+          indexName: "",
+          hits: { per_page: 10 },
+          labels: { input_placeholder: "Search for Posts", hits_empty: "We didn't find any results for the search: ${query}", hits_stats: "${hits} results found in ${time} ms" },
+        },
+      };
+    </script>
+
+    <link rel="canonical" href="http://chaosleong.github.io/2017/01/23/okhttp-interceptor-server-mock/" />
+
+    <title>利用 OkHttp Interceptor 模拟数据 | ChaosLeong's Blog</title>
+  </head>
+
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+    <div class="container sidebar-position-right page-post-detail">
+      <div class="headband"></div>
+
+      <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner">
+          <div class="site-brand-wrapper">
+            <div class="site-meta">
+              <div class="custom-logo-site-title">
+                <a href="/" class="brand" rel="start">
+                  <span class="logo-line-before"><i></i></span>
+                  <span class="site-title">ChaosLeong's Blog</span>
+                  <span class="logo-line-after"><i></i></span>
+                </a>
+              </div>
+
+              <p class="site-subtitle">有志则不甘为下流</p>
+            </div>
+
+            <div class="site-nav-toggle">
+              <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+              </button>
+            </div>
+          </div>
+
+          <nav class="site-nav">
+            <ul id="menu" class="menu">
+              <li class="menu-item menu-item-home">
+                <a href="/" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+
+                  首页
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-categories">
+                <a href="/categories" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+
+                  分类
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-about">
+                <a href="/about" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+
+                  关于
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-archives">
+                <a href="/archives" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+
+                  归档
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-tags">
+                <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+              </li>
+              <li class="menu-item menu-item-link">
+                <a href="https://coindataflow.com/en" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+                  更多信息
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main" class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
+            <div id="content" class="content">
+              <div id="posts" class="posts-expand">
+                <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+                  <link itemprop="mainEntityOfPage" href="http://chaosleong.github.io/2017/01/23/okhttp-interceptor-server-mock/" />
+
+                  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      利用 OkHttp Interceptor 模拟数据
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-23T11:05:15+08:00">
+                          2017-01-23
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                          <a href="/categories/Android/" itemprop="url" rel="index">
+                            <span itemprop="name">Android</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a href="/2017/01/23/okhttp-interceptor-server-mock/#comments" itemprop="discussionUrl">
+                          <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/23/okhttp-interceptor-server-mock/" itemprop="commentCount"></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>客户端开发过程中，偶尔我们会碰到服务端 API 尚未部署，而客户端又需要数据调试的情况。这时我们就可以根据与服务端协商定好的接口模拟数据的返回。</p>
+                    <a id="more"></a>
+                    <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2>
+                    <p>主要思路是通过拦截网络请求，返回模拟数据。而根据所处的环境不同，拦截方式可分为两种：</p>
+                    <ol>
+                      <li>
+                        由接受网络请求的 PC 使用抓包工具进行拦截；<br />
+                        优点：不依赖客户端平台，无需变更客户端代码<br />
+                        缺点：客户端与拦截工具需处于同一网络环境下，一旦 PC 的 IP 发生变化，需要重新设定
+                      </li>
+                      <li>
+                        客户端自身产生网络请求时直接拦截。<br />
+                        优点：灵活、易于调试<br />
+                        缺点：需要修改客户端代码，不同平台间可能各需修改一次
+                      </li>
+                    </ol>
+                    <p>
+                      第一种方法主要是使用 Charles 等抓包工具进行拦截并伪造数据，网上教程较多，本文不再累述。第二种方法中，主要是利用 OkHttp 框架中的 <code>Interceptor</code>（OkHttp 中 <code>Interceptor</code> 分为 <code>Application Interceptor</code> 以及 <code>Network Interceptor</code>，本文中
+                      <code>Interceptor</code> 均指 <code>Application Interceptor</code>。）对网络请求进行拦截，并返回模拟数据。
+                    </p>
+                    <h3 id="OkHttp-Interceptor"><a href="#OkHttp-Interceptor" class="headerlink" title="OkHttp Interceptor"></a>OkHttp Interceptor</h3>
+                    <p><img src="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png" alt="OkHttp Interceptor" /></p>
+                    <p>如图，OkHttp Interceptor 可以对 Request 和 Response 进行处理。</p>
+                    <p>利用这一机制，我们可以对 Request 进行拦截并将模拟数据填充于 Response 中并返回上层，从而达到模拟数据的目的。</p>
+                    <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+                    <figure class="highlight java">
+                      <figcaption><span>FakeApiInterceptor.java</span></figcaption>
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FakeApiInterceptor</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        Response response;</div><div class="line">        <span class="keyword">if</span> (BuildConfig.DEBUG &amp;&amp; chain.request().url().toString().equals(API_URL)) &#123;</div><div class="line">            String json = <span class="string">"&#123;\"code\": 200, \"message\": \"success\"&#125;"</span>;</div><div class="line">            response = <span class="keyword">new</span> Response.Builder()</div><div class="line">                    .code(<span class="number">200</span>)</div><div class="line">                    .addHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</div><div class="line">                    .body(ResponseBody.create(MediaType.parse(<span class="string">"application/json"</span>), json))</div><div class="line">                    .message(json)</div><div class="line">                    .request(chain.request())</div><div class="line">                    .protocol(Protocol.HTTP_2)</div><div class="line">                    .build();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            response = chain.proceed(chain.request());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> response;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>Debug 版且 url 对应的 API 需要模拟服务端数据返回时对请求进行拦截处理，直接创建 Response 返回模拟数据。</p>
+                    <h3 id="配合-Retrofit-使用"><a href="#配合-Retrofit-使用" class="headerlink" title="配合 Retrofit 使用"></a>配合 Retrofit 使用</h3>
+                    <p>搭配 Retrofit 时，需要先创建 OkHttpClient 并且调用 addInterceptor() 方法注册 Interceptor。</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre>
+                          </td>
+                          <td class="code">
+                            <pre><div class="line">OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient().newBuilder()</div><div class="line">           .addInterceptor(<span class="keyword">new</span> FakeInterceptor())</div><div class="line">       .build();</div><div class="line"></div><div class="line">Retrofit retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">       .baseUrl(BASE_URL)</div><div class="line">       .addConverterFactory(GsonConverterFactory.create())</div><div class="line">       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</div><div class="line">       .client(okHttpClient)</div><div class="line">       .build();</div></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+                    <p>利用 OkHttp Interceptor，我们只需在初始化 OkHttpClient 时添加一个提供模拟数据的 Interceptor 即可，而不需要改动网络请求的相关代码。当服务端 API 部署后，只需移除 <code>.addInterceptor(new FakeInterceptor())</code> 就能正常访问 API，相对比较灵活方便。</p>
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-tags">
+                      <a href="/tags/技巧/" rel="tag"># 技巧</a>
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+                        <a href="/2016/11/23/Change-default-compile-sdk-version-of-Android-Studio/" rel="next" title="修改 Android Studio 创建 module 时默认的 compileSdkVersion"> <i class="fa fa-chevron-left"></i> 修改 Android Studio 创建 module 时默认的 compileSdkVersion </a>
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+                        <a href="/2017/02/10/Configuring-Gradle-Proxy/" rel="prev" title="Gradle 设置代理"> Gradle 设置代理 <i class="fa fa-chevron-right"></i> </a>
+                      </div>
+                    </div>
+                  </footer>
+                </article>
+
+                <div class="post-spread"></div>
+              </div>
+            </div>
+
+            <div class="comments" id="comments">
+              <div id="disqus_thread">
+                <noscript>
+                  Please enable JavaScript to view the
+                  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-toggle">
+            <div class="sidebar-toggle-line-wrap">
+              <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+            </div>
+          </div>
+
+          <aside id="sidebar" class="sidebar">
+            <div class="sidebar-inner">
+              <ul class="sidebar-nav motion-element">
+                <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+                  文章目录
+                </li>
+                <li class="sidebar-nav-overview" data-target="site-overview">
+                  站点概览
+                </li>
+              </ul>
+
+              <section class="site-overview sidebar-panel">
+                <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                  <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Chaos Leong" />
+                  <p class="site-author-name" itemprop="name">Chaos Leong</p>
+
+                  <p class="site-description motion-element" itemprop="description">个人博客，技术分享</p>
+                </div>
+                <nav class="site-state motion-element">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives">
+                      <span class="site-state-item-count">25</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">6</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element"></div>
+              </section>
+
+              <!--noindex-->
+              <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+                <div class="post-toc">
+                  <div class="post-toc-content">
+                    <ol class="nav">
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#思路"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#OkHttp-Interceptor"><span class="nav-number">1.1.</span> <span class="nav-text">OkHttp Interceptor</span></a>
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#配合-Retrofit-使用"><span class="nav-number">2.1.</span> <span class="nav-text">配合 Retrofit 使用</span></a>
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </section>
+              <!--/noindex-->
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            &copy;
+            <span itemprop="copyrightYear">2017</span>
+            <span class="with-love">
+              <i class="fa fa-heart"></i>
+            </span>
+            <span class="author" itemprop="copyrightHolder">Chaos Leong</span>
+          </div>
+
+          <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+          <div class="theme-info">
+            主题 -
+            <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+              NexT.Pisces
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      if (Object.prototype.toString.call(window.Promise) !== "[object Function]") {
+        window.Promise = null;
+      }
+    </script>
+
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+    <script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+    <script id="dsq-count-scr" src="https://chaosleongs-blog.disqus.com/count.js" async></script>
+
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = "http://chaosleong.github.io/2017/01/23/okhttp-interceptor-server-mock/";
+        this.page.identifier = "2017/01/23/okhttp-interceptor-server-mock/";
+        this.page.title = "利用 OkHttp Interceptor 模拟数据";
+      };
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://chaosleongs-blog.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", "" + +new Date());
+      (d.head || d.body).appendChild(s);
+    </script>
+  </body>
+</html>

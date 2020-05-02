@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+    <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+    <meta name="keywords" content="技巧," />
+
+    <link rel="alternate" href="/atom.xml" title="ChaosLeong's Blog" type="application/atom+xml" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+    <meta name="description" content="某些场景下，我们需要基于某个仓库的 tag、branch 或者 commit 来进行二次开发。" />
+    <meta name="keywords" content="技巧" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Forking a Repository" />
+    <meta property="og:url" content="http://chaosleong.github.io/2016/11/18/Forking-a-Repository/index.html" />
+    <meta property="og:site_name" content="ChaosLeong&#39;s Blog" />
+    <meta property="og:description" content="某些场景下，我们需要基于某个仓库的 tag、branch 或者 commit 来进行二次开发。" />
+    <meta property="og:locale" content="zh-Hans" />
+    <meta property="og:updated_time" content="2016-11-19T03:12:02.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Forking a Repository" />
+    <meta name="twitter:description" content="某些场景下，我们需要基于某个仓库的 tag、branch 或者 commit 来进行二次开发。" />
+
+    <script type="text/javascript" id="hexo.configurations">
+      var NexT = window.NexT || {};
+      var CONFIG = {
+        root: "/",
+        scheme: "Pisces",
+        sidebar: { position: "right", display: "post", offset: 12, offset_float: 0, b2t: false, scrollpercent: false },
+        fancybox: true,
+        motion: true,
+        duoshuo: {
+          userId: "0",
+          author: "博主",
+        },
+        algolia: {
+          applicationID: "",
+          apiKey: "",
+          indexName: "",
+          hits: { per_page: 10 },
+          labels: { input_placeholder: "Search for Posts", hits_empty: "We didn't find any results for the search: ${query}", hits_stats: "${hits} results found in ${time} ms" },
+        },
+      };
+    </script>
+
+    <link rel="canonical" href="http://chaosleong.github.io/2016/11/18/Forking-a-Repository/" />
+
+    <title>Forking a Repository | ChaosLeong's Blog</title>
+  </head>
+
+  <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+    <div class="container sidebar-position-right page-post-detail">
+      <div class="headband"></div>
+
+      <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner">
+          <div class="site-brand-wrapper">
+            <div class="site-meta">
+              <div class="custom-logo-site-title">
+                <a href="/" class="brand" rel="start">
+                  <span class="logo-line-before"><i></i></span>
+                  <span class="site-title">ChaosLeong's Blog</span>
+                  <span class="logo-line-after"><i></i></span>
+                </a>
+              </div>
+
+              <p class="site-subtitle">有志则不甘为下流</p>
+            </div>
+
+            <div class="site-nav-toggle">
+              <button>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+                <span class="btn-bar"></span>
+              </button>
+            </div>
+          </div>
+
+          <nav class="site-nav">
+            <ul id="menu" class="menu">
+              <li class="menu-item menu-item-home">
+                <a href="/" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+
+                  首页
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-categories">
+                <a href="/categories" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+
+                  分类
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-about">
+                <a href="/about" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+
+                  关于
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-archives">
+                <a href="/archives" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+
+                  归档
+                </a>
+              </li>
+
+              <li class="menu-item menu-item-tags">
+                <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+              </li>
+              <li class="menu-item menu-item-link">
+                <a href="https://coindataflow.com/en" rel="section">
+                  <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+                  更多信息
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main" class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
+            <div id="content" class="content">
+              <div id="posts" class="posts-expand">
+                <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+                  <link itemprop="mainEntityOfPage" href="http://chaosleong.github.io/2016/11/18/Forking-a-Repository/" />
+
+                  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Chaos Leong" />
+                    <meta itemprop="description" content="" />
+                    <meta itemprop="image" content="/images/avatar.png" />
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="ChaosLeong's Blog" />
+                  </span>
+
+                  <header class="post-header">
+                    <h1 class="post-title" itemprop="name headline">
+                      Forking a Repository
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-18T10:45:19+08:00">
+                          2016-11-18
+                        </time>
+                      </span>
+
+                      <span class="post-category">
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                          <a href="/categories/Git/" itemprop="url" rel="index">
+                            <span itemprop="name">Git</span>
+                          </a>
+                        </span>
+                      </span>
+
+                      <span class="post-comments-count">
+                        <span class="post-meta-divider">|</span>
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-comment-o"></i>
+                        </span>
+                        <a href="/2016/11/18/Forking-a-Repository/#comments" itemprop="discussionUrl">
+                          <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/18/Forking-a-Repository/" itemprop="commentCount"></span>
+                        </a>
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+                    <p>某些场景下，我们需要基于某个仓库的 <code>tag</code>、<code>branch</code> 或者 <code>commit</code> 来进行二次开发。</p>
+                    <a id="more"></a>
+                    <p>例如，我们打算基于 <code>CyanogenMod/android_packages_apps_Launcher3</code> 进行二次功能开发，一般情况下我们需要 fork 一份源码到自己的 Github 上进行开发（当然也有其他途径），并且在 CM 更新 Launcher3 后我们还能通过 rebase 或 merge 更新 CM 的代码。</p>
+                    <p>又如，直接在「Source」上 checkout 一条新的分支进行开发，并且如果 master 上有做什么更新，也可以通过 rebase 或 merge 同步更新。</p>
+                    <h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2>
+                    <p>熟悉 Git 的朋友们，日常中对于 Fork 和 Branch 也不会陌生。稍有留意的，就能明白这两者之间不同方面的优劣。</p>
+                    <h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3>
+                    <p>使用 fork 方式进行「分叉」，优点有：</p>
+                    <ul>
+                      <li>能独立于「Source」进行开发</li>
+                      <li>「Source」仓库的更新、优化我们能够比较方便地同步更新</li>
+                    </ul>
+                    <p>缺点在于：</p>
+                    <ul>
+                      <li>同步「Source」的代码时相对 branch 会比较麻烦，需要 fetch「Source」或者 add 一个 new remote 后再 merge</li>
+                      <li>更多的仓库</li>
+                    </ul>
+                    <h3 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h3>
+                    <p>而使用 branch 进行「分叉」，优点在于：</p>
+                    <ul>
+                      <li>能直接对 source branch 进行 rebase 或 merge</li>
+                    </ul>
+                    <p>而缺点在于：</p>
+                    <ul>
+                      <li>（可能）会导致仓库存在过多的 branches 或 tags</li>
+                      <li>更大的仓库</li>
+                    </ul>
+                    <h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2>
+                    <p>「Fork」和「Branch」的选择，个人更倾向于「Fork」。虽然「Branch」在更新的时候会更快捷，但是「Fork」避免了一堆 Branches 和 Tags，相比之下看着更舒服点（略鸡肋的理由）。</p>
+                    <p>另一个更重要的理由是，考虑以下场景：</p>
+                    <p>我们需要基于 AOSP 6.0 进行不同的产品开发，而不同产品间的 APPs 以及系统 UI 不同。另有一个团队根据 Google 的修改维护这个 AOSP 6.0 的镜像，该镜像只会更新 framework 或者 firmware 等同享的内容（也可以当作该镜像只有除 APPs 及 UI 相关外的代码）。</p>
+                    <p>
+                      当我们有新的产品需要开发时，只需要 frok 一份最新的 master 镜像进行开发即可，而且最新的镜像也不会有 UI 相关的 commit。这样做则避免了在 AOSP 的 commit log 上看到负责 APPs 开发的人员的 commit，而作为 APPs 开发的人员也可以忽略底层开发人员的
+                      commit（题外话：偶尔也需要找底层的锅_(:зゝ∠)_）。
+                    </p>
+                    <p>这样的情况下当然是用「Fork」更好，不是吗？</p>
+                    <h2 id="Forking-a-Repository"><a href="#Forking-a-Repository" class="headerlink" title="Forking a Repository"></a>Forking a Repository</h2>
+                    <p>用 Github 的同学，请注意 Github 不支持 fork 自己的仓库（所有权属于自己）且需自己手动同步。而 Bitbucket 则既可以 fork 别人的仓库，又可以 fork 自己的仓库，并且在无冲突的情况下能直接同步 source 的代码。</p>
+                    <h3 id="Forking"><a href="#Forking" class="headerlink" title="Forking"></a>Forking</h3>
+                    <p>如果不借助 Github、Bitbucket 等平台的 fork 功能，如何 fork 仓库？</p>
+                    <p>主要思路如下：</p>
+                    <ol>
+                      <li>Clone source 仓库，<code>git clone https://github.com/whoever/whatever.git</code></li>
+                      <li>选择基点（<code>tag</code>，<code>branch</code> or <code>commit</code>）并以此作为 master，<code>git checkout tag</code>，<code>git branch -d master</code>，<code>git checkout -b master</code></li>
+                      <li>修改 remote URLs 为新仓库的 URLs，<code>git remote set-url origin https://github.com/whoever/new-whatever.git</code></li>
+                    </ol>
+                    <p>或者</p>
+                    <ol>
+                      <li>初始化本地仓库，<code>git init</code></li>
+                      <li>添加 source 仓库，<code>git remote add source https://github.com/whoever/whatever.git</code></li>
+                      <li>Fetch source 仓库的代码，<code>git fetch source</code> 或 <code>git fetch source branch_name</code></li>
+                      <li>合并特定的 commit，<code>git merge commit</code></li>
+                    </ol>
+                    <h3 id="Syncing"><a href="#Syncing" class="headerlink" title="Syncing"></a>Syncing</h3>
+                    <p>如果需要同步 source 仓库的更新，有两种方法：</p>
+                    <h4 id="添加-Remote"><a href="#添加-Remote" class="headerlink" title="添加 Remote"></a>添加 Remote</h4>
+                    <ol>
+                      <li>添加 source remote，命名为 “source”: <code>git remote add source https://github.com/whoever/whatever.git</code></li>
+                      <li>Fetch source remote: <code>git fetch source</code></li>
+                      <li>确保你的仓库在 master 分支: <code>git checkout master</code></li>
+                      <li>合并 source/master 上的 commit: <code>git merge source/master</code>，或者 <code>git merge commit</code> 其中 commit 是 source 上的某一个 commit hash</li>
+                    </ol>
+                    <h4 id="不添加-Remote"><a href="#不添加-Remote" class="headerlink" title="不添加 Remote"></a>不添加 Remote</h4>
+                    <ol>
+                      <li><code>git fetch https://github.com/whoever/whatever.git</code> 或者 <code>git fetch https://github.com/whoever/whatever.git branch_name</code></li>
+                      <li><code>git merge commit</code>，如果是最后一个 commit，可以直接 <code>git merge FETCH_HEAD</code></li>
+                    </ol>
+                    <p>相对来说，更建议添加一个 Remote，避免每次都要输入 URLs 以及 git <code>Counting objects</code> 过多。</p>
+                    <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+                    <p>无论「Fork」或者「Branch」，本质上是为了提高我们的效率，不至于被各种信息分离关注点。如果其中一种方式导致工作量增加，不就是本末倒置？所以在使用「分叉」之前，请先考虑自己的场景该使用哪种方式。</p>
+                    <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>
+                    <ul>
+                      <li><a href="http://stackoverflow.com/a/31460870/3351990" target="_blank" rel="external">Retrieve specific commit from a remote Git repository</a></li>
+                      <li><a href="http://stackoverflow.com/a/7244456/3351990" target="_blank" rel="external">How do I update a GitHub forked repository?</a></li>
+                    </ul>
+                  </div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <div></div>
+
+                  <footer class="post-footer">
+                    <div class="post-tags">
+                      <a href="/tags/技巧/" rel="tag"># 技巧</a>
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+                        <a href="/2016/11/16/Fast-Android-asset-theming-with-ColorFilter/" rel="next" title="[译] 使用 ColorFilter 快速地主题化"> <i class="fa fa-chevron-left"></i> [译] 使用 ColorFilter 快速地主题化 </a>
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+                        <a href="/2016/11/23/Change-default-compile-sdk-version-of-Android-Studio/" rel="prev" title="修改 Android Studio 创建 module 时默认的 compileSdkVersion"> 修改 Android Studio 创建 module 时默认的 compileSdkVersion <i class="fa fa-chevron-right"></i> </a>
+                      </div>
+                    </div>
+                  </footer>
+                </article>
+
+                <div class="post-spread"></div>
+              </div>
+            </div>
+
+            <div class="comments" id="comments">
+              <div id="disqus_thread">
+                <noscript>
+                  Please enable JavaScript to view the
+                  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-toggle">
+            <div class="sidebar-toggle-line-wrap">
+              <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+              <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+            </div>
+          </div>
+
+          <aside id="sidebar" class="sidebar">
+            <div class="sidebar-inner">
+              <ul class="sidebar-nav motion-element">
+                <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+                  文章目录
+                </li>
+                <li class="sidebar-nav-overview" data-target="site-overview">
+                  站点概览
+                </li>
+              </ul>
+
+              <section class="site-overview sidebar-panel">
+                <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                  <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Chaos Leong" />
+                  <p class="site-author-name" itemprop="name">Chaos Leong</p>
+
+                  <p class="site-description motion-element" itemprop="description">个人博客，技术分享</p>
+                </div>
+                <nav class="site-state motion-element">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives">
+                      <span class="site-state-item-count">25</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">6</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element"></div>
+              </section>
+
+              <!--noindex-->
+              <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+                <div class="post-toc">
+                  <div class="post-toc-content">
+                    <ol class="nav">
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#比较"><span class="nav-number">1.</span> <span class="nav-text">比较</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#Fork"><span class="nav-number">1.1.</span> <span class="nav-text">Fork</span></a>
+                          </li>
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#Branch"><span class="nav-number">1.2.</span> <span class="nav-text">Branch</span></a>
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#选择"><span class="nav-number">2.</span> <span class="nav-text">选择</span></a>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#Forking-a-Repository"><span class="nav-number">3.</span> <span class="nav-text">Forking a Repository</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#Forking"><span class="nav-number">3.1.</span> <span class="nav-text">Forking</span></a>
+                          </li>
+                          <li class="nav-item nav-level-3">
+                            <a class="nav-link" href="#Syncing"><span class="nav-number">3.2.</span> <span class="nav-text">Syncing</span></a>
+                            <ol class="nav-child">
+                              <li class="nav-item nav-level-4">
+                                <a class="nav-link" href="#添加-Remote"><span class="nav-number">3.2.1.</span> <span class="nav-text">添加 Remote</span></a>
+                              </li>
+                              <li class="nav-item nav-level-4">
+                                <a class="nav-link" href="#不添加-Remote"><span class="nav-number">3.2.2.</span> <span class="nav-text">不添加 Remote</span></a>
+                              </li>
+                            </ol>
+                          </li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a>
+                      </li>
+                      <li class="nav-item nav-level-2">
+                        <a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </section>
+              <!--/noindex-->
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="footer-inner">
+          <div class="copyright">
+            &copy;
+            <span itemprop="copyrightYear">2017</span>
+            <span class="with-love">
+              <i class="fa fa-heart"></i>
+            </span>
+            <span class="author" itemprop="copyrightHolder">Chaos Leong</span>
+          </div>
+
+          <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+          <div class="theme-info">
+            主题 -
+            <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+              NexT.Pisces
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      if (Object.prototype.toString.call(window.Promise) !== "[object Function]") {
+        window.Promise = null;
+      }
+    </script>
+
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+    <script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+    <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+    <script id="dsq-count-scr" src="https://chaosleongs-blog.disqus.com/count.js" async></script>
+
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = "http://chaosleong.github.io/2016/11/18/Forking-a-Repository/";
+        this.page.identifier = "2016/11/18/Forking-a-Repository/";
+        this.page.title = "Forking a Repository";
+      };
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://chaosleongs-blog.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", "" + +new Date());
+      (d.head || d.body).appendChild(s);
+    </script>
+  </body>
+</html>
